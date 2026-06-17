@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dad Joke Machine &mdash; Marcus Idiart</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #1a1a2e; --card: #0f3460; --yellow: #ffd166;
+      --orange: #ef8c2a; --green: #06d6a0; --red: #ef233c;
+      --white: #ffffff; --muted: rgba(255,255,255,0.55);
+    }
+    body {
+      font-family: 'Nunito', Arial, sans-serif;
+      background: var(--bg); color: var(--white);
+      min-height: 100vh; display: flex; flex-direction: column;
+    }
+    .top-nav {
+      background: rgba(0,0,0,0.3); padding: 0.85rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .top-nav .brand { font-size: 1.1rem; font-weight: 900; color: var(--yellow); }
+    .top-nav .links { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .top-nav a {
+      color: rgba(255,255,255,0.8); text-decoration: none;
+      font-size: 0.85rem; font-weight: 700; padding: 0.3rem 0.8rem;
+      border: 1px solid rgba(255,255,255,0.18); border-radius: 50px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .top-nav a:hover { border-color: var(--yellow); color: var(--yellow); }
+    main {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 2rem 1.25rem; text-align: center;
+    }
+    .emoji-bounce { font-size: 3.5rem; display: block; animation: bounce 2s ease-in-out infinite; }
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    h1 { font-size: 2.4rem; font-weight: 900; color: var(--yellow); margin: 0.5rem 0 0.25rem; }
+    .subtitle { color: var(--muted); font-size: 1rem; margin-bottom: 2rem; }
+    .joke-card {
+      background: var(--card); border-radius: 20px; padding: 2.5rem 2rem 2rem;
+      max-width: 620px; width: 100%; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.06); position: relative;
+    }
+    .joke-card.pop { animation: pop 0.35s ease; }
+    @keyframes pop { 0%{transform:scale(0.96);opacity:0.6} 60%{transform:scale(1.03)} 100%{transform:scale(1);opacity:1} }
+    .big-quote {
+      position: absolute; top: 0.75rem; left: 1.25rem; font-size: 5rem;
+      line-height: 1; color: rgba(255,209,102,0.1); font-family: Georgia, serif;
+      pointer-events: none; user-select: none;
+    }
+    #joke-display {
+      min-height: 90px; font-size: 1.25rem; font-weight: 600;
+      line-height: 1.65; color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ratings {
+      display: none; justify-content: center; gap: 0.6rem;
+      margin-top: 1.5rem; flex-wrap: wrap;
+    }
+    .rating-btn {
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.13);
+      color: var(--white); padding: 0.45rem 1.1rem; border-radius: 50px;
+      font-size: 0.95rem; font-family: 'Nunito', sans-serif;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+    }
+    .rating-btn:hover { background: rgba(255,255,255,0.14); transform: scale(1.08); }
+    .rating-btn.groan { background: rgba(239,35,60,0.25); border-color: var(--red); }
+    .rating-btn.meh   { background: rgba(255,209,102,0.2); border-color: var(--yellow); }
+    .rating-btn.lol   { background: rgba(6,214,160,0.2); border-color: var(--green); }
+    #reaction { font-style: italic; font-size: 0.9rem; color: var(--muted); min-height: 1.3em; margin-top: 0.6rem; }
+    .btn-get {
+      background: linear-gradient(135deg, var(--yellow), var(--orange));
+      color: #1a1a2e; border: none; padding: 1rem 2.5rem;
+      font-size: 1.1rem; font-weight: 900; font-family: 'Nunito', sans-serif;
+      border-radius: 50px; cursor: pointer; margin-top: 1.5rem;
+      box-shadow: 0 4px 18px rgba(255,209,102,0.3);
+      transition: transform 0.15s, box-shadow 0.15s; max-width: 280px; width: 100%;
+    }
+    .btn-get:hover { transform: translateY(-3px); box-shadow: 0 8px 26px rgba(255,209,102,0.45); }
+    .counter { font-size: 0.82rem; color: var(--muted); font-weight: 700; margin-top: 0.75rem; min-height: 1.2em; }
+    .history-wrap { display: none; width: 100%; max-width: 620px; margin-top: 1.75rem; text-align: left; }
+    .history-wrap h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 0.6rem; }
+    .history-list { list-style: none; max-height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.45rem; }
+    .history-list::-webkit-scrollbar { width: 4px; }
+    .history-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 2px; }
+    .history-list li { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 0.55rem 0.85rem; font-size: 0.87rem; color: rgba(255,255,255,0.8); line-height: 1.5; }
+    footer { text-align: center; padding: 1rem 1.5rem; font-size: 0.8rem; color: var(--muted); border-top: 1px solid rgba(255,255,255,0.06); }
+    footer a { color: var(--yellow); text-decoration: none; }
+    @media(max-width:480px){ h1{font-size:1.8rem} #joke-display{font-size:1.05rem} .joke-card{padding:2rem 1.1rem 1.5rem} }
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <span class="brand">&#128514; Dad Joke Machine</span>
+  <div class="links">
+    <a href="index.html">Home</a>
+    <a href="resume.html">Resume</a>
+    <a href="scratch.html">Golf Page</a>
+  </div>
+</nav>
+
+<main>
+  <span class="emoji-bounce">&#128514;</span>
+  <h1>Dad Joke Machine</h1>
+  <p class="subtitle">A fresh groan-worthy dad joke every time. Groaning guaranteed.</p>
+
+  <div class="joke-card" id="jokeCard">
+    <span class="big-quote">&ldquo;</span>
+    <div id="joke-display">Hit the button for your first dad joke!</div>
+    <div class="ratings" id="ratings">
+      <button class="rating-btn" onclick="rate(this,'groan')">&#128549; Groan</button>
+      <button class="rating-btn" onclick="rate(this,'meh')">&#128528; Meh</button>
+      <button class="rating-btn" onclick="rate(this,'lol')">&#128514; LOL</button>
+    </div>
+    <div id="reaction"></div>
+  </div>
+
+  <button class="btn-get" id="mainBtn" onclick="nextJoke()">&#9889; Hit Me With a Joke</button>
+  <p class="counter" id="counter"></p>
+
+  <div class="history-wrap" id="historyWrap">
+    <h3>&#128221; Recent Jokes</h3>
+    <ul class="history-list" id="historyList"></ul>
+  </div>
+</main>
+
+<footer>
+  Dad jokes courtesy of <a href="https://icanhazdadjoke.com" target="_blank" rel="noopener">icanhazdadjoke.com</a>
+  &bull; Built by Marcus Idiart &bull;
+  <a href="scratch.html">Back to Golf Page</a>
+</footer>
+
+<script>
+  // === Large built-in joke list — guaranteed to work everywhere ===
+  var JOKES = [
+    "Why don't scientists trust atoms? Because they make up everything!",
+    "I'm reading a book about anti-gravity. It's impossible to put down.",
+    "Did you hear about the restaurant on the moon? Great food, no atmosphere.",
+    "I used to hate facial hair, but then it grew on me.",
+    "Why can't you give Elsa a balloon? Because she'll let it go.",
+    "What do you call cheese that isn't yours? Nacho cheese.",
+    "I'm on a seafood diet. I see food and I eat it.",
+    "Why did the scarecrow win an award? He was outstanding in his field.",
+    "I used to be a banker, but I lost interest.",
+    "Why did the bicycle fall over? Because it was two-tired.",
+    "I'm friends with all electricians. We have good current-cy.",
+    "Why can't a nose be 12 inches long? Because then it would be a foot.",
+    "What do you call a fish with no eyes? A fsh.",
+    "I only know 25 letters of the alphabet. I don't know y.",
+    "What do you call fake spaghetti? An impasta.",
+    "How do you organize a space party? You planet.",
+    "Why do cows wear bells? Because their horns don't work.",
+    "What did the ocean say to the beach? Nothing, it just waved.",
+    "I would avoid the sushi if I were you. It's a little fishy.",
+    "Why do melons have weddings? Because they cantaloupe.",
+    "What did the janitor say when he jumped out of the closet? Supplies!",
+    "Why don't eggs tell jokes? They'd crack each other up.",
+    "I asked my dog what two minus two is. He said nothing.",
+    "Why did the math book look so sad? Because it had too many problems.",
+    "What do you call a bear with no teeth? A gummy bear.",
+    "Why can't skeletons fight each other? They don't have the guts.",
+    "What do you call an alligator in a vest? An investigator.",
+    "Why did the golfer bring an extra pair of pants? In case he got a hole in one.",
+    "I told my wife she should embrace her mistakes. She gave me a hug.",
+    "What do you call a sleeping dinosaur? A dino-snore.",
+    "Why do programmers prefer dark mode? Because light attracts bugs.",
+    "I got a job at a bakery because I kneaded dough.",
+    "What's a vampire's favorite fruit? A blood orange.",
+    "Did you hear about the claustrophobic astronaut? He just needed a little space.",
+    "Why did the stadium get hot after the game? All the fans left.",
+    "What did one hat say to the other? You stay here, I'll go on ahead.",
+    "I don't trust stairs. They're always up to something.",
+    "Why did the coffee file a police report? It got mugged.",
+    "What do you call a factory that makes okay products? A satisfactory.",
+    "Why don't scientists trust atoms? Because they make up everything!",
+    "I told my doctor I broke my arm in two places. He told me to stop going to those places.",
+    "What do you call a man with a rubber toe? Roberto.",
+    "Why did the golfer wear two pairs of pants? In case he got a hole in one.",
+    "I'm writing a book about hurricanes and tornadoes. It's a whirlwind adventure.",
+    "What do you call a lazy kangaroo? A pouch potato.",
+    "Why did the tomato turn red? Because it saw the salad dressing.",
+    "What do you call a pig that does karate? A pork chop.",
+    "I used to play piano by ear. Now I use my hands.",
+    "Why can't Elsa have a balloon? She'll let it go.",
+    "What do you call a boomerang that won't come back? A stick.",
+    "I asked my dad for his best dad joke. He said, 'You.'",
+    "Why don't scientists trust atoms? They make up everything.",
+    "What do you call a snowman with a six-pack? An abdominal snowman.",
+    "Why did the cookie go to the doctor? Because it felt crummy.",
+    "What kind of tea is hard to swallow? Reality.",
+    "I went to the zoo and saw a baguette in a cage. The zookeeper said it was bread in captivity.",
+    "Why do golfers always carry a spare pair of socks? In case they get a hole in one.",
+    "What do you call a group of crows? Attempted murder.",
+    "Why did the computer go to the doctor? It had a virus.",
+    "I hate Russian dolls. They're so full of themselves.",
+    "What time did the man go to the dentist? Tooth-hurty.",
+    "Why don't scientists trust atoms? Because they make up everything!",
+    "What do you call a sad cup of coffee? Depresso.",
+    "Why did the stadium get so hot? All the fans left.",
+    "I'm on a whiskey diet. I've lost three days already.",
+    "What's brown and sticky? A stick.",
+    "I asked a librarian if they had books about paranoia. She whispered, 'They're right behind you.'",
+    "Why can't you play cards in the jungle? Too many cheetahs.",
+    "What do you call a pony with a cough? A little hoarse.",
+    "Why did the invisible man turn down the job? He couldn't see himself doing it.",
+    "What's Forrest Gump's password? 1forrest1.",
+    "What do you call an elephant that doesn't matter? Irrelephant.",
+    "I have a joke about construction, but I'm still working on it.",
+    "Why did the golfer bring a ladder to the course? To improve his drive.",
+    "What do you call a sleeping T-Rex? A dino-snore.",
+    "Why don't scientists trust atoms? They make up everything!"
+  ];
+
+  var usedIndexes = [];
+  var jokeCount   = 0;
+  var history     = [];
+
+  var jokeDisplay = document.getElementById('joke-display');
+  var mainBtn     = document.getElementById('mainBtn');
+  var counter     = document.getElementById('counter');
+  var ratingsDiv  = document.getElementById('ratings');
+  var reactionDiv = document.getElementById('reaction');
+  var jokeCard    = document.getElementById('jokeCard');
+  var historyWrap = document.getElementById('historyWrap');
+  var historyList = document.getElementById('historyList');
+
+  var reactionLines = {
+    groan: ["Yep. That's a dad joke.", "Classic. Painful. Perfect.", "The groan IS the point."],
+    meh:   ["Fair. The bar was low.", "It tried its best.", "Tomorrow's will be better."],
+    lol:   ["Dad joke elite!", "Print that on a shirt.", "Your dad would be proud."]
+  };
+
+  function getRandomJoke() {
+    if (usedIndexes.length >= JOKES.length) usedIndexes = [];
+    var available = [];
+    for (var i = 0; i < JOKES.length; i++) {
+      if (usedIndexes.indexOf(i) === -1) available.push(i);
+    }
+    var idx = available[Math.floor(Math.random() * available.length)];
+    usedIndexes.push(idx);
+    return JOKES[idx];
+  }
+
+  function nextJoke() {
+    var joke = getRandomJoke();
+
+    jokeDisplay.textContent = joke;
+    jokeCount++;
+    mainBtn.textContent = '⚡ Another One!';
+    counter.textContent = 'Jokes delivered: ' + jokeCount;
+
+    // Clear ratings
+    var btns = ratingsDiv.querySelectorAll('.rating-btn');
+    btns.forEach(function(b) { b.className = 'rating-btn'; });
+    reactionDiv.textContent = '';
+
+    // Animate
+    jokeCard.classList.remove('pop');
+    void jokeCard.offsetWidth;
+    jokeCard.classList.add('pop');
+
+    // Show ratings
+    ratingsDiv.style.display = 'flex';
+
+    // History
+    history.unshift(joke);
+    if (history.length > 10) history.pop();
+    renderHistory();
+  }
+
+  function rate(btn, level) {
+    var btns = ratingsDiv.querySelectorAll('.rating-btn');
+    btns.forEach(function(b) { b.className = 'rating-btn'; });
+    btn.className = 'rating-btn ' + level;
+    var lines = reactionLines[level];
+    reactionDiv.textContent = lines[Math.floor(Math.random() * lines.length)];
+  }
+
+  function renderHistory() {
+    if (history.length === 0) return;
+    historyWrap.style.display = 'block';
+    historyList.innerHTML = history.map(function(j) {
+      return '<li>' + j.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</li>';
+    }).join('');
+  }
+</script>
+
+</body>
+</html>

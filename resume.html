@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume &mdash; Marcus Idiart</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    body { font-family: 'Inter', 'Segoe UI', sans-serif; }
+
+    /* Print-friendly tweaks */
+    @media print {
+      .navbar-custom, .footer-custom { display: none; }
+      .resume-header { padding: 2rem 0 1rem; }
+      body { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==============================
+       NAVBAR
+  =============================== -->
+  <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+    <div class="container">
+      <a class="navbar-brand-custom" href="index.html">Marcus Idiart</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarMain" aria-controls="navbarMain"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarMain">
+        <ul class="navbar-nav ms-auto align-items-center gap-1">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="resume.html">Resume</a></li>
+          <li class="nav-item"><a class="nav-link" href="scratch.html">Golf Page</a></li>
+          <li class="nav-item"><a class="nav-link" href="webapp.html">Dad Jokes</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="mailto:idiart3@byu.edu" title="Email">
+              <i class="fas fa-envelope"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.instagram.com/marcusidiart3/" target="_blank" rel="noopener" title="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==============================
+       RESUME HEADER
+  =============================== -->
+  <section class="resume-header">
+    <div class="container">
+      <div class="row align-items-end">
+        <div class="col-lg-8">
+          <p class="text-uppercase mb-1" style="color: var(--accent); letter-spacing: 2px; font-size: 0.8rem; font-weight: 600;">
+            Curriculum Vitae
+          </p>
+          <h1 class="fw-800">Marcus Idiart</h1>
+          <p class="mb-0" style="color: rgba(255,255,255,0.75); font-size: 1.1rem;">
+            Economics Student &bull; Business Minor &bull; Brigham Young University &bull; Class of 2029
+          </p>
+        </div>
+        <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+          <a href="mailto:idiart3@byu.edu" class="text-white text-decoration-none d-block mb-1">
+            <i class="fas fa-envelope me-2" style="color: var(--accent);"></i>idiart3@byu.edu
+          </a>
+          <a href="https://www.instagram.com/marcusidiart3/" target="_blank" rel="noopener"
+             class="text-white text-decoration-none d-block">
+            <i class="fab fa-instagram me-2" style="color: var(--accent);"></i>@marcusidiart3
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================
+       EDUCATION
+  =============================== -->
+  <section class="resume-section">
+    <div class="container">
+      <h2 class="section-title">
+        <i class="fas fa-graduation-cap me-2 text-accent"></i>Education
+      </h2>
+      <hr class="section-divider left" />
+
+      <div class="timeline-item">
+        <div class="timeline-title">Bachelor of Science in Economics</div>
+        <div class="timeline-org">Brigham Young University &mdash; Marriott School of Business</div>
+        <div class="timeline-date">Expected Graduation: April 2029 &bull; Provo, Utah</div>
+        <div class="timeline-desc">
+          <ul class="mb-0">
+            <li>Minor in Business</li>
+            <li>Relevant coursework: Microeconomics, Macroeconomics, Business Statistics, Financial Accounting</li>
+            <li>Member of the Marriott School of Business student community</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================
+       WORK EXPERIENCE
+  =============================== -->
+  <section class="resume-section">
+    <div class="container">
+      <h2 class="section-title">
+        <i class="fas fa-briefcase me-2 text-accent"></i>Work Experience
+      </h2>
+      <hr class="section-divider left" />
+
+      <div class="timeline-item">
+        <div class="timeline-title">Legal Assistant</div>
+        <div class="timeline-org">Idiart Law Group &mdash; Central Point, OR (Remote)</div>
+        <div class="timeline-date">Ongoing</div>
+        <div class="timeline-desc">
+          <ul>
+            <li>Supports a plaintiff personal injury and Social Security Disability law firm operating across Oregon, California, Utah, Idaho, and Washington.</li>
+            <li>Manages confidential client records, case documentation, and medical correspondence in Clio Manage.</li>
+            <li>Coordinates communications between clients, medical offices, and adjusters using Outlook, Heymarket, and CaseStatus.</li>
+            <li>Assists with intake screening, records requests, and administrative workflows for a team of approximately 80 staff.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-title">Shoe Reseller &amp; Entrepreneur</div>
+        <div class="timeline-org">Reselling Secrets &mdash; Self-Employed</div>
+        <div class="timeline-date">Ongoing</div>
+        <div class="timeline-desc">
+          <ul>
+            <li>Independently sources, authenticates, and resells limited-edition athletic footwear through online platforms and in-person channels.</li>
+            <li>Applies market analysis and pricing strategy to maximize margins in a competitive resale market.</li>
+            <li>Manages inventory, customer communications, shipping logistics, and transaction records.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-title">Athletic Director Assistant</div>
+        <div class="timeline-org">Athletic Department</div>
+        <div class="timeline-date">Previous Experience</div>
+        <div class="timeline-desc">
+          <ul>
+            <li>Provided administrative and logistical support to the Athletic Director for scheduling, events, and program operations.</li>
+            <li>Coordinated with coaches, student-athletes, and staff to ensure smooth execution of athletic events and activities.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-title">Landscaping &amp; Construction Worker</div>
+        <div class="timeline-org">Quality Tree Service</div>
+        <div class="timeline-date">Previous Experience</div>
+        <div class="timeline-desc">
+          <ul>
+            <li>Performed landscaping, tree service, and light construction in a physically demanding outdoor environment.</li>
+            <li>Demonstrated reliability, punctuality, and strong teamwork under time-sensitive field conditions.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-title">Full-Time Missionary</div>
+        <div class="timeline-org">The Church of Jesus Christ of Latter-day Saints</div>
+        <div class="timeline-date">2 Years (Prior to University)</div>
+        <div class="timeline-desc">
+          <ul>
+            <li>Served a two-year full-time mission, managing a personal schedule of 60+ hours per week of community and service work.</li>
+            <li>Led and mentored a rotating team of missionary companions, providing training and accountability.</li>
+            <li>Developed advanced interpersonal communication, conflict resolution, and cross-cultural engagement skills.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================
+       SKILLS
+  =============================== -->
+  <section class="resume-section">
+    <div class="container">
+      <h2 class="section-title">
+        <i class="fas fa-tools me-2 text-accent"></i>Skills
+      </h2>
+      <hr class="section-divider left" />
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <h6 class="fw-700 text-uppercase mb-3" style="color: var(--primary); letter-spacing: 1px; font-size: 0.8rem;">Technical</h6>
+          <ul class="list-unstyled">
+            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i>Microsoft Excel (Intermediate)</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i>VBA / Macro Automation</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i>Tableau (Data Visualization)</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i>AI Tools for Business Automation</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i>Clio Manage (Legal CRM)</li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h6 class="fw-700 text-uppercase mb-3" style="color: var(--primary); letter-spacing: 1px; font-size: 0.8rem;">Business</h6>
+          <ul class="list-unstyled">
+            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i>Sales &amp; Negotiation</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i>Market Research &amp; Pricing</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i>Entrepreneurship</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i>Client &amp; Customer Relations</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i>Administrative Operations</li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h6 class="fw-700 text-uppercase mb-3" style="color: var(--primary); letter-spacing: 1px; font-size: 0.8rem;">Interpersonal</h6>
+          <ul class="list-unstyled">
+            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i>Leadership &amp; Team Management</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i>Written &amp; Verbal Communication</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i>Event Coordination</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i>Time Management</li>
+            <li class="mb-2"><i class="fas fa-check-circle text-accent me-2"></i>Cross-Cultural Communication</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================
+       AWARDS
+  =============================== -->
+  <section class="resume-section">
+    <div class="container">
+      <h2 class="section-title">
+        <i class="fas fa-award me-2 text-accent"></i>Awards &amp; Honors
+      </h2>
+      <hr class="section-divider left" />
+
+      <div class="col-lg-8">
+        <div class="award-item">
+          <div class="award-icon"><i class="fas fa-medal"></i></div>
+          <div>
+            <strong>Eagle Scout</strong> &mdash; Boy Scouts of America
+            <div class="text-muted" style="font-size: 0.9rem;">
+              Highest rank in scouting, earned through demonstrated leadership, community service, and a self-directed Eagle Project benefiting the local community.
+            </div>
+          </div>
+        </div>
+        <div class="award-item">
+          <div class="award-icon"><i class="fas fa-trophy"></i></div>
+          <div>
+            <strong>Principles Award</strong>
+            <div class="text-muted" style="font-size: 0.9rem;">
+              Awarded for consistent demonstration of integrity, character, and principled conduct in academic and community settings.
+            </div>
+          </div>
+        </div>
+        <div class="award-item">
+          <div class="award-icon"><i class="fas fa-star"></i></div>
+          <div>
+            <strong>Academic Awards</strong>
+            <div class="text-muted" style="font-size: 0.9rem;">
+              Recognized for academic excellence and high achievement throughout secondary and post-secondary education.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================
+       FOOTER
+  =============================== -->
+  <footer class="footer-custom">
+    <div class="container">
+      &copy; 2025 Marcus Idiart &mdash; Brigham Young University &mdash; Marriott School of Business
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
